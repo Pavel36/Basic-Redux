@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 
 function App() {
   const dispatch = useDispatch()
-  const cash = useSelector(state=>state.cash)
+  const cash = useSelector(state=>state.cash.cash)
 
   const getCash = (cashParam) => {
       dispatch({type:'GET_CASH', payload:cashParam})
@@ -17,8 +17,9 @@ function App() {
   return (
     <div className="App">
       <div style={{display: 'flex'}} >
-        <Button type='primary' onClick={()=>addCash()}>add cash</Button>
-        <Button onClick={()=>getCash()}>get cash</Button>
+        <Input value={cash}/>
+        <Button type='primary' onClick={()=>addCash(Number(prompt()))}>add cash</Button>
+        <Button onClick={()=>getCash(Number(prompt()))}>get cash</Button>
       </div>
     </div>
   );
