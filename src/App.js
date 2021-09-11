@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import { Button, Input } from 'antd';
 import {Radio} from 'antd'
+import { addCustomerAction, removeCustomerAction } from './store/CustomerReducer';
+import { addCashAction, getCashAction } from './store/CashReducer';
 
 function App() {
   const dispatch = useDispatch()
@@ -9,11 +11,11 @@ function App() {
   const customers = useSelector(state=>state.customers.customers)
 
   const getCash = (cashParam) => {
-      dispatch({type:'GET_CASH', payload:cashParam})
+    dispatch(getCashAction(cashParam))
   }
 
   const addCash = (cashParam) => {
-    dispatch({type:'ADD_CASH', payload:cashParam})
+    dispatch(addCashAction(cashParam))
   }
 
   const addCustomer = (name) => {
@@ -21,11 +23,11 @@ function App() {
       name,
       id: Date.now()
     }
-    dispatch({type:'ADD_CUSTOMER', payload:customer})
+    dispatch(addCustomerAction(customer))
   }
 
   const removeCustomer = (customer) => {
-    dispatch({type:'REMOVE_CUSTOMER', payload: customer.id})
+    dispatch(removeCustomerAction(customer.id))
   }
 
   return (
