@@ -4,6 +4,7 @@ import { Button, Input } from 'antd';
 import {Radio} from 'antd'
 import { addCustomerAction, removeCustomerAction } from './store/CustomerReducer';
 import { addCashAction, getCashAction } from './store/CashReducer';
+import { fetchCustomers } from './asyncActions/customers';
 
 function App() {
   const dispatch = useDispatch()
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{}} >
+      <div>
         <Radio.Group>
           <Input value={cash}/>
           <Button type='primary' onClick={()=>addCash(Number(prompt()))}>add cash</Button>
@@ -45,7 +46,7 @@ function App() {
           <Button type='primary' onClick={()=>addCustomer(prompt())}>add customer</Button>
           <Button onClick={()=>getCash(Number(prompt()))}>delete customer</Button>
         </Radio.Group>
-
+        <Button onClick={()=>dispatch(fetchCustomers())}>fetch customers</Button>
       </div>
       {customers.length > 0 ? 
         <div>
